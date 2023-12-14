@@ -32,9 +32,11 @@ public class GamePanel extends JPanel implements ActionListener  {
     char direction = 'R'; 
     boolean running = false;
     Image backgroundImage;
+    Image headImage;
     Timer timer;
     Random random;
     String path = "D:\\HEY\\SnakeGame\\src\\main\\java\\com\\mycompany\\snakegame\\hello.png";
+    String headPath = "D:\\HEY\\SnakeGame\\src\\main\\java\\com\\mycompany\\snakegame\\Head.png";
 
     
       
@@ -72,6 +74,7 @@ public class GamePanel extends JPanel implements ActionListener  {
     }
     public void draw(Graphics g){ 
         if (running){
+            headImage = new ImageIcon(headPath).getImage();
             
 //            for (int i = 0; i < SCREEN_WIDTH / UNIT_SIZE; i++) {
 //                for (int j = 0; j < SCREEN_HEIGHT / UNIT_SIZE; j++) {
@@ -89,13 +92,15 @@ public class GamePanel extends JPanel implements ActionListener  {
             
             for (int i=0; i<bodyParts;i++){
                 if(i == 0){
-                    g.setColor(Color.black);
-                    g.fillOval(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+                    g.setColor(Color.green);
+                    g.drawImage(headImage, x[0], y[0], UNIT_SIZE, UNIT_SIZE, this);
+
+                    //g.fillOval(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
                 }
                 else{
                     //g.setColor(new Color(45,180,0));
-                    g.setColor(Color.black);
-                    g.fillRect(x[i],y[i],UNIT_SIZE, UNIT_SIZE);
+                    g.setColor(new Color(130,195,95,255));
+                    g.fillOval(x[i],y[i],UNIT_SIZE, UNIT_SIZE);
                 }
             }
             g.setColor(Color.red);
@@ -183,6 +188,8 @@ public class GamePanel extends JPanel implements ActionListener  {
         g.setFont(new Font("Ink Free",Font.BOLD,20));
         FontMetrics metrics2 = getFontMetrics(g.getFont());
         g.drawString("Score:  "+applesEaten, (SCREEN_WIDTH - metrics2.stringWidth("Score :"+applesEaten))/2,g.getFont().getSize());
+        
+        
 
     }
     @Override
